@@ -1,5 +1,7 @@
 package ChatPackage;
 
+import org.w3c.dom.ls.LSOutput;
+
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -52,6 +54,7 @@ public class ChatUser {
         for (ChatUser member : members){
             try {
                 if (name.equals(member.getName())){
+
                     this.out = new DataOutputStream(member.getUserSocket().getOutputStream());
                     out.writeUTF(line);
                     break;
@@ -77,7 +80,8 @@ public class ChatUser {
             }
             line = lineChecker(line, members);
         }
-        writeMessage("[ " + getName() + " has left this chat ] Members: " + members.size(), members, false);
+        int currents = members.size() - 1;
+        writeMessage("[ " + getName() + " has left this chat ] Members: " + currents, members, false);
         System.out.println("[ " + getName() + " has left this chat ]");
     }
 
